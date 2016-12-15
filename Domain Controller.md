@@ -19,8 +19,8 @@ Sandra and Andy's company gets acquired by a larger company that has an existing
 ### Proof-of-concept (no public deliverable)
  * The administrative user must be able to install FreeIPA as the sole domain in a new forest
  * The administrative user must be able to perform the installation using a graphical tool as part of the Cockpit admin console.
- * The administrative user must be provided with a recipe allowing them to reproduce (or modify) the behavior that the GUI console would perform.
- * The administrative user must be able to execute the recipe independent of Cockpit.
+ * The administrative user must be provided with an Ansible playbook allowing them to reproduce (or modify) the behavior that the GUI console would perform.
+ * The administrative user must be able to execute the Ansible playbook independent of Cockpit.
  
 ### Minimum Viable Project (Fedora 27, late 2017)
  * In addition to the PoC capabilities, the administrative user must be able to install replica FreeIPA servers for an existing FreeIPA domain.
@@ -31,4 +31,21 @@ Sandra and Andy's company gets acquired by a larger company that has an existing
 
 ### Long-term Goals
  * The administrative user should be able to deploy a new subordinate FreeIPA domain into an existing FreeIPA forest.
- * The administrative user should be able to deploy a new subordinate FreeIPA domain into an existing misxed FreeIPA/Active Directory forest.
+ * The administrative user should be able to deploy a new subordinate FreeIPA domain into an existing mixed FreeIPA/Active Directory forest.
+ * The administrative user should be able to join an existing FreeIPA forest into an existing Active Directory domain forest.
+
+## Technical Requirements
+(Note: some of these may already exist)
+### FreeIPA
+ * An idempotent installer that can be driven by Ansible
+ * Capability to enroll a machine as a replica of an existing domain.
+  * This enrollment may not require preparation steps performed on a separate machine.
+  * This enrollment must be possible to initiate solely from the machine requesting the enrollment.
+ * Capability to enroll a machine as a domain in an existing Active Directory Forest.
+  * As far as possible, this should be possible to initiate solely from the machine requesting enrollment. This may require developing PowerShell capabilities to configure the Windows machine.
+ * Long-term: FreeIPA must support trusted FreeIPA domains
+
+### Cockpit
+ * Cockpit must provide a graphical user experience for executing all of the workflows described in this document.
+ * Cockpit must be able to export an Ansible playbook at the end of the workflow, prior to executing the changes.
+ * Cockpit must be able to import an Ansible playbook for domain creation and execute it. (Expert mode for custom changes made to the Ansible playbook).
