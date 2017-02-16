@@ -15,26 +15,7 @@ As the organization grows, Sandra hires Andy Grant to help her manage the load. 
 ### Integration into an existing environment
 Sandra and Andy's company gets acquired by a larger company that has an existing Microsoft Windows domain serving its users. In order to ensure that the transation goes smoothly, Sandra wants to merge their old environment into the new one by having it treated as a new domain in their new company's existing domain forest. This integration must enable users from the new parent company to interact with all of the existing systems in their network.
 
-## Milestones
-### Proof-of-concept (no public deliverable)
- * The administrative user must be able to install FreeIPA as the sole domain in a new forest
- * The administrative user must be able to perform the installation using a graphical tool as part of the Cockpit admin console.
- * The administrative user must be provided with an Ansible playbook allowing them to reproduce (or modify) the behavior that the GUI console would perform.
- * The administrative user must be able to execute the Ansible playbook independent of Cockpit.
- 
-### Minimum Viable Project (Fedora 27, late 2017)
- * In addition to the PoC capabilities, the administrative user must be able to install replica FreeIPA servers for an existing FreeIPA domain.
-
-### Enterprise Target (Fedora 28, early/mid 2018)
- * The administrative user must be able to install FreeIPA as a subordinate domain of an existing Active Directory forest.
- * The administrative user must be able to install FreeIPA replicas into a mixed FreeIPA/Active Directory forest.
-
-### Long-term Goals
- * The administrative user should be able to deploy a new subordinate FreeIPA domain into an existing FreeIPA forest.
- * The administrative user should be able to deploy a new subordinate FreeIPA domain into an existing mixed FreeIPA/Active Directory forest.
- * The administrative user should be able to join an existing FreeIPA forest into an existing Active Directory domain forest.
-
-## Technical Requirements
+## Detailed Technical Requirements
 (Note: some of these may already exist)
 ### FreeIPA
  * An installer that can be repeatedly driven by a Ansible playbook without returning an error on any valid configuration.
@@ -42,6 +23,19 @@ Sandra and Andy's company gets acquired by a larger company that has an existing
   * This enrollment may not require preparation steps performed on a separate machine.
   * This enrollment must be possible to initiate solely from the machine requesting the enrollment.
  * Support for Linux client hosts.
+ * Must provide appropriate identity-lookup services to properly-configured LDAP clients.
+  * Must be capable of serving LDAP requests, including TLS-encrypted LDAP requests, on port 389.
+  * Must be capable of serving LDAPS (LDAP encrypted with SSL) requests on port 636.
+  * Must be capable of returning LDAP and LDAPS search results using simple auth or SASL/GSSAPI auth.
+  * Must be capable of returning POSIX user accounts through the SSSD service on the client.
+ * Must provide appropriate authentication services to properly configured clients.
+  * Must be capable of performing user authentication against the LDAP server by using an authenticated LDAP bind over an encrypted (LDAP+TLS or LDAPS) channel.
+  * Must be capable of performing user authentication against the Kerberos server by using the Kerberos TGT acquisition protocol.
+ * Must provide appropriate domain-name services to properly configured DNS clients.
+  * Must be capable of serving DNS host records on port 53.
+  * Must serve DNS SRV records for ldap and kerberos on port 53
+ * Must provide a graphical (web-based) and non-graphical (CLI or API) user environment for creating and managing POSIX users, groups and hosts.
+ * Must provide a graphical (web-based) and non-graphical (CLI or API) user environment for managing access-control rules.
  * Capability to enroll a machine as a domain in an existing Active Directory Forest.
   * As far as possible, this should be possible to initiate solely from the machine requesting enrollment. This may require developing PowerShell capabilities to configure the Windows machine.
  * Clients with accounts from a trusted Active Directory domain must be able to log into Linux hosts enrolled in the FreeIPA domain using their Windows credentials for systems on which they are authorized.
