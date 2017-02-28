@@ -20,8 +20,7 @@ Sandra and Andy's company gets acquired by a larger company that has an existing
 ### FreeIPA
  * An installer that can be repeatedly driven by a Ansible playbook without returning an error on any valid configuration.
  * Capability to enroll a machine as a replica of an existing domain.
-  * This enrollment may not require preparation steps performed on a separate machine.
-  * This enrollment must be possible to initiate solely from the machine requesting the enrollment.
+  * This enrollment must be possible to perform solely from the machine requesting the enrollment, requiring no actions performed on other systems.
  * Support for Linux client hosts.
  * Must provide appropriate identity-lookup services to properly-configured LDAP clients.
   * Must be capable of serving LDAP requests, including TLS-encrypted LDAP requests, on port 389.
