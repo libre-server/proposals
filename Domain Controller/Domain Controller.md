@@ -15,6 +15,9 @@ As the organization grows, Sandra hires Andy Grant to help her manage the load. 
 ### Integration into an existing environment
 Sandra and Andy's company gets acquired by a larger company that has an existing Microsoft Windows domain serving its users. In order to ensure that the transation goes smoothly, Sandra wants to merge their old environment into the new one by having it treated as a new domain in their new company's existing domain forest. This integration must enable users from the new parent company to interact with all of the existing systems in their network.
 
+### Simplified onboarding for new employees
+Sandra and Andy's company is growing fast, so they onboard new people with new hardware equipment like laptops and workstations on a monthly basis. They need a centralized configuration management system that allows them to control and deploy configuration profiles with the most common and critical settings that reflect the needs of each department of the organization, and allows them to go from a vanilla install of a Linux desktop OS to a fully configured system in minutes.
+
 ## Detailed Technical Requirements
 (Note: some of these may already exist)
 ### FreeIPA
@@ -44,6 +47,10 @@ Sandra and Andy's company gets acquired by a larger company that has an existing
  * Cockpit must provide a graphical user experience for executing all of the workflows described in this document.
  * Cockpit must be able to export an Ansible playbook at the end of the workflow, prior to executing the changes.
  * Cockpit must be able to import an Ansible playbook for domain creation and execute it. (Expert mode for custom changes made to the Ansible playbook).
+ 
+### Fleet Commander
+ * Fleet Commander must provide an administrative interface as an extension to Cockpit that covers the desktop configuration management workflow
+ * Fleet Commander must provide a fully integrated experience with Cockpit, FreeIPA and possibly Active Directory
 
 ## Non-requirements
 These are a list of features that will be expressly out of scope for this project.
