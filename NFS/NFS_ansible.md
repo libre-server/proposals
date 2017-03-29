@@ -21,9 +21,7 @@ This module controls what filesystem paths are shared remotely by the NFS server
 * I chose to make the assumption that all `allowed_clients` would be expected to have the same permissions and options. If this is not an appropriate assumption, then we may need to ensure that the module will treat (local_path,allowed_clients) as a tuple and combine them appropriately in the resulting configuration.
 * I simplified the configuration of `sec=`. The assumption will be that the selected choice will be the only security method permitted for this share.
 
-## Missing pieces
-* Support for idmapd options. I don't know this well enough and could use some help. It may also make sense for this to be a separate Ansible module, as it shares little with the configuration of shares.
-
 ## Open Questions
+* Support for idmapd options. I don't know this well enough and could use some help. It may also make sense for this to be a separate Ansible module, as it shares little with the configuration of shares. This may also be needed to configure global settings like Kerberos realm
 * I don't like the option names for `state`, but I couldn't come up with better ones. Suggestions welcome.
 * `remote_path` is in there as a future-compatible option; in the container world, we may have the ability to "fake" the mount point to the client, so I added that as an option here. I'm not sure whether to keep it or drop it.
